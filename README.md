@@ -56,12 +56,15 @@ endmodule
 ```
 **4:1 MUX Data Flow Implementation:**
 ```
-
-module mux_4_1_dataflow (a,s,out);
-input [3:0]a;
-input [1:0]s;
-output out;
-assign out=s[1]==0?(s[0]==0?a[0]:a[1]):s[0]==0?a[2]:a[3];
+module mux4to1_df(A,B,C,D,S1,S0,Y);
+    input A,B,C,D,S1,S0;
+    output Y;
+    
+    assign Y =   (S1 == 0 && S0 == 0) ? A:
+                 (S1 == 0 && S0 == 1) ? B:
+                 (S1 == 1 && S0 == 0) ? C: 
+                 (S1 == 1 && S0 == 1) ? D: 1'b0;
+                                         
 endmodule
 
 ```
